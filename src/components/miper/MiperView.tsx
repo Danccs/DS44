@@ -65,11 +65,12 @@ export const MiperView: React.FC<MiperViewProps> = ({
   const assessments = matrix?.assessments || [];
 
   const filtered = assessments.filter((a) => {
+    const s = (search || '').toLowerCase();
     const matchesSearch =
-      a.hazardName.toLowerCase().includes(search.toLowerCase()) ||
-      a.process.toLowerCase().includes(search.toLowerCase()) ||
-      a.jobPosition.toLowerCase().includes(search.toLowerCase()) ||
-      a.riskDescription.toLowerCase().includes(search.toLowerCase());
+      (a.hazardName || '').toLowerCase().includes(s) ||
+      (a.process || '').toLowerCase().includes(s) ||
+      (a.jobPosition || '').toLowerCase().includes(s) ||
+      (a.riskDescription || '').toLowerCase().includes(s);
     const matchesLevel = levelFilter === 'ALL' || a.riskLevel === levelFilter;
     const matchesCenter = centerFilter === 'ALL' || a.workCenterId === centerFilter;
     return matchesSearch && matchesLevel && matchesCenter;

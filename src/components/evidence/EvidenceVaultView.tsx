@@ -47,10 +47,11 @@ export const EvidenceVaultView: React.FC<EvidenceVaultViewProps> = ({
   const [notes, setNotes] = useState('');
 
   const filtered = evidences.filter((e) => {
+    const s = (search || '').toLowerCase();
     const matchesSearch =
-      e.title.toLowerCase().includes(search.toLowerCase()) ||
-      e.fileName.toLowerCase().includes(search.toLowerCase()) ||
-      e.fileHash.toLowerCase().includes(search.toLowerCase());
+      (e.title || '').toLowerCase().includes(s) ||
+      (e.fileName || '').toLowerCase().includes(s) ||
+      (e.fileHash || '').toLowerCase().includes(s);
 
     const matchesType = typeFilter === 'ALL' || e.evidenceType === typeFilter;
     const matchesStatus =

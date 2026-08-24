@@ -31,11 +31,12 @@ export const ChecklistView: React.FC<ChecklistViewProps> = ({
   const categories = Array.from(new Set(requirements.map((r) => r.requirement.category)));
 
   const filtered = requirements.filter((r) => {
+    const s = (search || '').toLowerCase();
     const matchesSearch =
-      r.requirement.title.toLowerCase().includes(search.toLowerCase()) ||
-      r.requirement.code.toLowerCase().includes(search.toLowerCase()) ||
-      r.requirement.articleReference.toLowerCase().includes(search.toLowerCase());
-    const matchesCat = selectedCategory === 'ALL' || r.requirement.category === selectedCategory;
+      (r.requirement?.title || '').toLowerCase().includes(s) ||
+      (r.requirement?.code || '').toLowerCase().includes(s) ||
+      (r.requirement?.articleReference || '').toLowerCase().includes(s);
+    const matchesCat = selectedCategory === 'ALL' || r.requirement?.category === selectedCategory;
     return matchesSearch && matchesCat;
   });
 

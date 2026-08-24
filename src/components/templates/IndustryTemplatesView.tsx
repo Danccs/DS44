@@ -25,10 +25,11 @@ export const IndustryTemplatesView: React.FC<IndustryTemplatesViewProps> = ({
   const [isApplying, setIsApplying] = useState(false);
   const [appliedSuccess, setAppliedSuccess] = useState(false);
 
-  const getIcon = (id: string) => {
-    if (id.includes('transporte')) return Truck;
-    if (id.includes('construccion')) return HardHat;
-    if (id.includes('taller')) return Wrench;
+  const getIcon = (id: string = '') => {
+    const cleanId = (id || '').toLowerCase();
+    if (cleanId.includes('transporte')) return Truck;
+    if (cleanId.includes('construccion')) return HardHat;
+    if (cleanId.includes('taller')) return Wrench;
     return Layers;
   };
 

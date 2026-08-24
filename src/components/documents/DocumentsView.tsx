@@ -34,9 +34,10 @@ export const DocumentsView: React.FC<DocumentsViewProps> = ({
   const [approver, setApprover] = useState('Gerencia General & Prevención');
 
   const filtered = documents.filter((d) => {
+    const s = (search || '').toLowerCase();
     const matchesSearch =
-      d.title.toLowerCase().includes(search.toLowerCase()) ||
-      d.code.toLowerCase().includes(search.toLowerCase());
+      (d.title || '').toLowerCase().includes(s) ||
+      (d.code || '').toLowerCase().includes(s);
     const matchesCat = catFilter === 'ALL' || d.category === catFilter;
     return matchesSearch && matchesCat;
   });

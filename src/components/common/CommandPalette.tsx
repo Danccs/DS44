@@ -76,7 +76,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   ];
 
   const filtered = commands.filter((c) =>
-    c.label.toLowerCase().includes(query.toLowerCase())
+    (c.label || '').toLowerCase().includes((query || '').toLowerCase())
   );
 
   return (

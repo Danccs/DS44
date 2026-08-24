@@ -140,10 +140,11 @@ apiRouter.get('/workers', (req, res) => {
     const q = (search as string).toLowerCase();
     list = list.filter(
       w =>
-        w.firstName.toLowerCase().includes(q) ||
-        w.lastName.toLowerCase().includes(q) ||
-        w.rut.toLowerCase().includes(q) ||
-        w.jobPosition.toLowerCase().includes(q)
+        (w.firstName || '').toLowerCase().includes(q) ||
+        (w.lastName || '').toLowerCase().includes(q) ||
+        (w.fullName || '').toLowerCase().includes(q) ||
+        (w.rut || '').toLowerCase().includes(q) ||
+        (w.jobPosition || '').toLowerCase().includes(q)
     );
   }
   res.json(list);
@@ -327,7 +328,10 @@ apiRouter.get('/actions', (req, res) => {
   if (status) list = list.filter(a => a.status === status);
   if (priority) list = list.filter(a => a.priority === priority);
   if (workCenterId) list = list.filter(a => a.workCenterId === workCenterId);
-  if (responsible) list = list.filter(a => a.responsibleName.toLowerCase().includes((responsible as string).toLowerCase()));
+  if (responsible) {
+    const rQuery = (responsible as string).toLowerCase();
+    list = list.filter(a => (a.responsibleName || '').toLowerCase().includes(rQuery));
+  }
 
   res.json(list);
 });

@@ -197,7 +197,7 @@ export class ComplianceEngine {
     // 5. Open Findings from Inspections
     inspections.forEach(insp => {
       insp.findings.filter(f => f.status === 'Abierto' || f.status === 'EnTratamiento').forEach(f => {
-        if (!items.some(i => i.title.includes(f.description))) {
+        if (!items.some(i => (i.title || '').includes(f.description || ''))) {
           items.push({
             id: `inbox-finding-${f.id}`,
             type: 'UNRESOLVED_FINDING',

@@ -38,10 +38,12 @@ export const WorkersView: React.FC<WorkersViewProps> = ({
   const [email, setEmail] = useState('');
 
   const filtered = workers.filter((w) => {
+    const s = (search || '').toLowerCase();
+    const workerName = w.fullName || `${w.firstName || ''} ${w.lastName || ''}`.trim();
     const matchesSearch =
-      w.fullName.toLowerCase().includes(search.toLowerCase()) ||
-      w.rut.toLowerCase().includes(search.toLowerCase()) ||
-      w.jobPosition.toLowerCase().includes(search.toLowerCase());
+      workerName.toLowerCase().includes(s) ||
+      (w.rut || '').toLowerCase().includes(s) ||
+      (w.jobPosition || '').toLowerCase().includes(s);
 
     const matchesCenter = centerFilter === 'ALL' || w.workCenterId === centerFilter;
     const matchesOdi = odiFilter === 'ALL' || w.odiStatus === odiFilter;

@@ -57,10 +57,11 @@ export const ActionCenterView: React.FC<ActionCenterViewProps> = ({
   const [formDueDate, setFormDueDate] = useState('2025-03-30');
 
   const filtered = actions.filter((a) => {
+    const s = (search || '').toLowerCase();
     const matchesSearch =
-      a.title.toLowerCase().includes(search.toLowerCase()) ||
-      a.code.toLowerCase().includes(search.toLowerCase()) ||
-      a.responsibleName.toLowerCase().includes(search.toLowerCase());
+      (a.title || '').toLowerCase().includes(s) ||
+      (a.code || '').toLowerCase().includes(s) ||
+      (a.responsibleName || '').toLowerCase().includes(s);
 
     const matchesStatus = statusFilter === 'ALL' || a.status === statusFilter;
     const matchesCenter = centerFilter === 'ALL' || a.workCenterId === centerFilter;

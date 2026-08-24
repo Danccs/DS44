@@ -19,10 +19,11 @@ export const AuditLogsView: React.FC<AuditLogsViewProps> = ({ logs }) => {
   const [actionFilter, setActionFilter] = useState('ALL');
 
   const filtered = logs.filter((l) => {
+    const s = (search || '').toLowerCase();
     const matchesSearch =
-      l.details.toLowerCase().includes(search.toLowerCase()) ||
-      l.performedByName.toLowerCase().includes(search.toLowerCase()) ||
-      l.entityType.toLowerCase().includes(search.toLowerCase());
+      (l.details || '').toLowerCase().includes(s) ||
+      (l.performedByName || '').toLowerCase().includes(s) ||
+      (l.entityType || '').toLowerCase().includes(s);
     const matchesAction = actionFilter === 'ALL' || l.action === actionFilter;
     return matchesSearch && matchesAction;
   });
