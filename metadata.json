@@ -1,0 +1,6 @@
+{
+  "name": "DS44 Compliance OS",
+  "description": "Sistema Operativo de Cumplimiento Preventivo DS44 para PYMEs chilenas - Gestión de MIPER, Programa Preventivo, Inspecciones, Capacitaciones, Evidencias y Auditoría",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
